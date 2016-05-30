@@ -1,0 +1,24 @@
+{% extends "pacemaker/base.html" %}
+
+{% block title %}Migrate{% endblock %}
+
+{% block content %}
+<h2>Migrate</h2>
+다음 명령을 웹인터페이스를 통해 수행해드립니다. 혹은 쉘에 직접 접속하셔서 migrate를 수행하셔도 됩니다.
+<pre>
+    python manage.py migrate --settings={{ DJANGO_SETTINGS_MODULE }}
+</pre>
+
+{% if not result %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Migrate 수행하기" class="pure-button pure-button-primary" />
+    </form>
+{% else %}
+    <h3>실행결과</h3>
+    <pre>
+    {{ result }}
+    </pre>
+{% endif %}
+{% endblock %}
+

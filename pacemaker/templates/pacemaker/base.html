@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css" />
+<title>{% block title %}{% endblock %}</title>
+<style>
+body {
+    padding: 10px;
+}
+.alert-debug { background-color: #eee; }
+.alert-info { background-color: #b9def0;}
+.alert-success { background-color: #cbe7c0; }
+.alert-warning { background-color: #fbf3d1; }
+.alert-error { background-color: #e5bcbc; }
+.errorlist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.errorlist li {
+    color: red;
+}
+.help_text {
+}
+</style>
+</head>
+<body>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
+    <hr />
+    다른 명령
+    <ul>
+        <li><a href="{% url "migrate" %}">Migrate</a></li>
+        <li><a href="{% url "createsuperuser" %}">Create Super User</a></li>
+    </ul>
+    주의 : 본 Pacemaker 장고앱은 CLI (Command Line Interface) 에 익숙하지 않으신 분들을 위하여 개발되었습니다. 실서비스에서 URLConf에 노출될 경우 악의적인 목적으로 사용될 수도 있습니다. 보안에 유의해주세요.
+    <hr/>
+    &copy; <a href="http://facebook.com/askdjango/" target="_blank">AskDjango</a>
+</body>
+</html>
